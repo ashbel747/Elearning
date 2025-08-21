@@ -1,30 +1,20 @@
-/**
- * @file This file contains the role-based access control middleware.
- * It checks if an authenticated user has the necessary permissions to
- * access a specific route.
- */
+// Updated role.middleware.ts
+import { Request, Response, NextFunction } from "express"; // Add Request import
+import { UserRole } from "../shared/types"; // Remove IRequestWithUser import
+import { AppError } from "./errorHandler";
 
-import { Response, NextFunction } from "express";
-import { UserRole, IRequestWithUser } from "../shared/types";
-
-/**
- * @desc Role-based access control middleware.
- * @param {UserRole[]} allowedRoles - An array of roles that are permitted to access the route.
- */
 export const roleMiddleware = (allowedRoles: UserRole[]) => {
-  return (req: IRequestWithUser, res: Response, next: NextFunction) => {
-    // Check if the user is authenticated and has a role
+  return (req: Request, res: Response, next: NextFunction) => {
+    // ✅ req.user is now automatically recognized by TypeScript
+    // Thanks to module augmentation in types/express.d.ts
     if (!req.user || !req.user.role) {
-      return res
-        .status(403)
-        .json({ message: "Access denied. No user role found." });
+      return next(new AppError("Access denied. No user role found.", 403));
     }
 
-    // Check if the user's role is in the list of allowed roles.
     if (!allowedRoles.includes(req.user.role)) {
-      return res
-        .status(403)
-        .json({ message: "Access denied. Insufficient permissions." });
+      return next(
+        new AppError("Access denied. Insufficient permissions.", 403)
+      );
     }
 
     next();

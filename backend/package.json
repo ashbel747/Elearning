@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
- "dev": "nodemon --watch src --ext ts --exec ts-node src/server.ts",
+    "dev": "nodemon --watch src --ext ts --exec ts-node src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "lint": "tsc --noEmit"  },
+    "lint": "tsc --noEmit"
+  },
   "author": "",
   "license": "ISC",
   "description": "",
@@ -20,7 +21,8 @@
     "joi": "^18.0.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.17.2",
-    "multer": "^2.0.2"
+    "multer": "^2.0.2",
+    "zod": "^4.0.17"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
