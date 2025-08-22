@@ -2,6 +2,7 @@
 import { useAuth } from "../../context/AuthContext";
 import { X } from "lucide-react";
 import clsx from "clsx";
+import DirectEdLogo from "../../assets/image.webp"
 
 const studentLinks = [
   { name: "Dashboard", path: "/dashboard" },
@@ -36,7 +37,7 @@ export const Sidebar = ({
   return (
     <aside
       className={clsx(
-        "fixed top-0 left-0 h-full w-64 bg-white dark:bg-gray-900 shadow-lg transform transition-transform z-50",
+        "fixed top-0 left-0 h-full w-64 bg-amber-200 dark:bg-gray-900 shadow-lg transform transition-transform z-50",
         { "-translate-x-full": !isOpen, "translate-x-0": isOpen }
       )}
       role="navigation"
@@ -54,6 +55,13 @@ export const Sidebar = ({
       </div>
 
       <nav className="p-4 space-y-2">
+        <div className="bg-black/5 p-1 rounded inline-block">
+          <img 
+            src={DirectEdLogo} 
+            alt="DirectEd Logo" 
+            className="w-32 mb-4" 
+            />
+        </div>
         {links.map((link) => (
           <a
             key={link.name}

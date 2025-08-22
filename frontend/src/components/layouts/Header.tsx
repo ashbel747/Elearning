@@ -15,7 +15,7 @@ export const Header = ({ onMenuClick}: HeaderProps) => {
   const [search, setSearch] = useState("");
 
   return (
-    <header className="fixed top-0 left-0 w-full flex items-center justify-between p-4 shadow-md bg-white dark:bg-gray-900">
+    <header className="fixed top-0 left-0 w-full flex items-center justify-between p-4 shadow-md bg-gradient-to-r from-white to-amber-100 dark:bg-gray-900">
       {/* Left: Logo + Mobile Menu */}
       <div className="flex items-center gap-3">
         <button
@@ -25,11 +25,14 @@ export const Header = ({ onMenuClick}: HeaderProps) => {
         >
           <Menu size={24} />
         </button>
-        <img 
-          src={DirectEdLogo} 
-          alt="DirectEd Logo" 
-          className="w-32 p-2 bg-green-700 dark:bg-transparent" 
-        />
+        <div className="bg-black/20 rounded-lg inline-block">
+          <img 
+            src={DirectEdLogo} 
+            alt="DirectEd Logo" 
+            className="w-32 p-2" 
+          />
+        </div>
+        
       </div>
 
       {/* Middle: Search */}
