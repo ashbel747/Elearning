@@ -9,6 +9,7 @@ export enum UserRole {
 export interface ISignupRequest {
   email: string;
   password: string;
+  confirmPassword: string;
   name: string;
   role: UserRole;
 }

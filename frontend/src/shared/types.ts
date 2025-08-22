@@ -1,7 +1,7 @@
 export type Role = "student" | "instructor";
 
 export interface User {
-  id: string;
+  _id: string;
   name: string; // add name here too
   email: string;
   role: Role;
@@ -21,6 +21,7 @@ export interface LoginRequest {
 export interface SignupRequest extends LoginRequest {
   name: string; // ✅ added name
   role: Role;
+  confirmPassword: string;
 }
 
 export interface ResetPasswordRequest {

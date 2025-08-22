@@ -4,7 +4,7 @@ import {type ReactNode} from 'react'
 
 interface ProtectedRouteProps {
   children: ReactNode;
-  role?: "student" | "instructor"; // Optional role restriction
+  role?: "student" | "instructor"; 
 }
 
 export const ProtectedRoute = ({ children, role }: ProtectedRouteProps) => {
@@ -13,8 +13,8 @@ export const ProtectedRoute = ({ children, role }: ProtectedRouteProps) => {
   if (!user) return <Navigate to="/login" replace />;
 
   if (role && user.role !== role) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/" replace />; 
   }
 
-  return children;
+  return <>{children}</>;
 };

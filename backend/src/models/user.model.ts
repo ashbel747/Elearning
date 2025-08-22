@@ -2,15 +2,13 @@ import mongoose, { Schema, Document } from "mongoose";
 import bcrypt from "bcrypt";
 import { IUser, UserRole } from "../shared/Authtypes";
 
-// The corrected interface now explicitly includes the properties
-// that Mongoose adds automatically to every document.
 export interface IUserDocument extends Document {
   _id: mongoose.Types.ObjectId; // The _id is a Mongoose ObjectId
   name: string;
   email: string;
   password?: string;
   role: UserRole;
-  createdAt: Date; // Mongoose timestamps are of type Date
+  createdAt: Date;
   updatedAt: Date;
 
   matchPassword(enteredPassword: string): Promise<boolean>;

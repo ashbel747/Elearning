@@ -1,9 +1,13 @@
-import React from 'react'
+import { useAuth } from "../hooks/useAuth"
 
-const Dashboard = () => {
+export default function Dashboard() {
+  const { user, token } = useAuth();
+
   return (
-    <div>Dashboard</div>
-  )
+    <div>
+      <h1>Welcome {user?.name}</h1>
+      <p>Your role: {user?.role}</p>
+      <p>JWT: {token}</p>
+    </div>
+  );
 }
-
-export default Dashboard

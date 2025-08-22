@@ -19,7 +19,13 @@ export const signup = async (
   res: Response<IAuthResponse>,
   next: NextFunction
 ) => {
-  const { email, password, name, role } = req.body as ISignupRequest;
+  const { email, password, confirmPassword, name, role } =
+    req.body as ISignupRequest;
+
+  // Optional extra check (Zod already handles this)
+  if (password !== confirmPassword) {
+    return next(new AppError("Passwords do not match", 400));
+  }
 
   const userExists = await UserModel.findOne({ email });
   if (userExists) {
