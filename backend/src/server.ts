@@ -1,13 +1,20 @@
 import joi from "joi";
-import express from "express";
+import express, { Request, Response } from "express";
 import mongoose from "mongoose";
-import cors from "cors";
 import dotenv from "dotenv";
-import authRoutes from "./routes/auth.routes";
 import { errorMiddleware } from "./middleware/errorHandler";
 import quizRoutes from "./routes/Quiz/quiz.routes"; // <-- import quizzes
 import quizAttemptRoutes from "./routes/Quiz/quizAttempts";
 
+import cors from "cors";
+import connectDB from "./config/db";
+import authRoutes from "./routes/auth.routes";
+import searchRoutes from "./routes/search.route";
+import notificationRoutes from "./routes/notification.route";
+import progressRoutes from "./routes/progress.routes";
+import testimonialRoutes from "./routes/testimonial.routes";
+
+// Load environment variables
 dotenv.config();
 
 const app = express();
@@ -27,6 +34,14 @@ app.use("/api/quiz-attempts", quizAttemptRoutes);
 // The global error handler middleware. It MUST be placed after all other routes
 // so that it can catch any errors that are passed to the 'next' function.
 app.use(errorMiddleware);
+app.get("/", (req: Request, res: Response) => {
+  res.json({ message: "API is running...🚀🚀" });
+});
+app.use("/api/auth", authRoutes);
+app.use("/api/search", searchRoutes);
+app.use("/api/notifications", notificationRoutes);
+app.use("/api/progress", progressRoutes);
+app.use("/api/testimonials", testimonialRoutes);
 
 // Connect to the database and then start the server
 mongoose
