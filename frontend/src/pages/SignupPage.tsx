@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
-import { api } from "../services/api";
+import { api } from "../services/authapi";
 import { type SignupRequest, type AuthResponse } from "../shared/types";
 import { useAuth } from "../hooks/useAuth";
 
 export const Signup: React.FC = () => {
   const { login } = useAuth();
+  const navigate = useNavigate();
 
   const [form, setForm] = useState<SignupRequest>({
     name: "",
@@ -26,14 +28,18 @@ export const Signup: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
-    setSuccessMessage(null); // Reset success message on new submission
+    setSuccessMessage(null);
 
     try {
       const res = await api.post<AuthResponse>("/signup", form);
-      setSuccessMessage("Signup successful!"); // Set success message
-      // Note: The original code redirects immediately, you may want to show the message first
-      // setTimeout(() => login(res.data.user), 1500);
-      login(res.data.user);
+      setSuccessMessage("Signup successful! Redirecting to login...");
+
+      // Add a small delay to show the success message before redirecting
+      setTimeout(() => {
+        login(res.data.user);
+        navigate("/login");
+      }, 1500);
+
     } catch (err) {
       const axiosError = err as AxiosError<{ message?: string }>;
       setError(axiosError.response?.data?.message ?? "Signup failed");

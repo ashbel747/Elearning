@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AxiosError } from "axios";
-import { api } from "../services/api";
+import { api } from "../services/authapi";
 import { type ChangePasswordRequest } from "../shared/types";
 
 export const ChangePassword: React.FC = () => {

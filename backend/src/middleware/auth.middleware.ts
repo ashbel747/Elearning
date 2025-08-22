@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import { IJwtPayload } from "../shared/types";
+import { IJwtPayload } from "../shared/Authtypes";
 import { AppError } from "./errorHandler";
 import { getJwtSecret } from "../config/env"; // Import the function
 

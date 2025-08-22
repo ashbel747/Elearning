@@ -1,6 +1,6 @@
 // Updated role.middleware.ts
 import { Request, Response, NextFunction } from "express"; // Add Request import
-import { UserRole } from "../shared/types"; // Remove IRequestWithUser import
+import { UserRole } from "../shared/Authtypes"; // Remove IRequestWithUser import
 import { AppError } from "./errorHandler";
 
 export const roleMiddleware = (allowedRoles: UserRole[]) => {

@@ -7,7 +7,7 @@ import {
   ILoginRequest,
   IAuthResponse,
   IChangePasswordRequest,
-} from "../shared/types";
+} from "../shared/Authtypes";
 import UserModel from "../models/user.model";
 import { getJwtSecret } from "../config/env"; // Import the function
 

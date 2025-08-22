@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { UserRole } from "../shared/types";
+import { UserRole } from "../shared/Authtypes";
 
 // A common, simple regex for email validation
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

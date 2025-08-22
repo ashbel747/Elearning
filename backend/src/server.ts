@@ -5,12 +5,14 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.routes";
-import { errorMiddleware } from "./middleware/errorHandler"; // Import the error middleware
+import { errorMiddleware } from "./middleware/errorHandler";
+import quizRoutes from "./routes/Quiz/quiz.routes"; // <-- import quizzes
+import quizAttemptRoutes from "./routes/Quiz/quizAttempts";
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3500;
 const MONGO_URI = process.env.MONGO_URI || "";
 
 // Middleware
@@ -19,6 +21,9 @@ app.use(express.json());
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/quizzes", quizRoutes); // <-- register quiz routes
+app.use("/api/quiz-attempts", quizAttemptRoutes);
 
 // The global error handler middleware. It MUST be placed after all other routes
 // so that it can catch any errors that are passed to the 'next' function.

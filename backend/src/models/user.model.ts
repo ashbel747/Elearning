@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 import bcrypt from "bcrypt";
-import { IUser, UserRole } from "../shared/types";
+import { IUser, UserRole } from "../shared/Authtypes";
 
 // The corrected interface now explicitly includes the properties
 // that Mongoose adds automatically to every document.
