@@ -20,7 +20,6 @@ app.use(express.json());
 
 // Routes
 app.use("/api/auth", authRoutes);
-app.use("/api/auth", authRoutes);
 app.use("/api/quizzes", quizRoutes); // <-- register quiz routes
 app.use("/api/quiz-attempts", quizAttemptRoutes);
 

@@ -1,10 +1,10 @@
 // src/components/QuizPage.tsx
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import QuestionCard from "./QuestionCard";
-import { useAuth } from "../hooks/useAuth";
-import { getQuizByLesson, submitQuizAttempt, setAuthToken } from "../services/quizApi";
-import {type  Quiz, type QuizAttempt } from "../shared/quiztypes";
+import QuestionCard from "../../components/QuestionCard";
+import { useAuth } from "../../hooks/useAuth";
+import { getQuizByLesson, submitQuizAttempt, setAuthToken } from "../../services/quizApi";
+import {type  Quiz, type QuizAttempt } from "../../shared/quiztypes";
 
 const QuizPage: React.FC = () => {
   const { lessonId } = useParams<{ lessonId: string }>();
