@@ -6,6 +6,7 @@ import authRoutes from "./routes/auth.routes";
 import searchRoutes from "./routes/search.route";
 import notificationRoutes from "./routes/notification.route";
 import progressRoutes from "./routes/progress.routes";
+import testimonialRoutes from "./routes/testimonial.routes";
 
 // Load environment variables
 dotenv.config();
@@ -28,6 +29,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/search", searchRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/progress", progressRoutes);
+app.use("/api/testimonials", testimonialRoutes);
 
 // Start server
 const PORT = process.env.PORT || 5000;

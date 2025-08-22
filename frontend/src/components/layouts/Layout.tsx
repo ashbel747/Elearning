@@ -18,7 +18,7 @@ export const Layout = ({ children }: LayoutProps) => {
         <Header
           onMenuClick={() => setSidebarOpen((prev) => !prev)}
         />
-        <main className="p-96 bg-gray-50 dark:bg-gray-800">{children}</main>
+        <main>{children}</main>
       </div>
     </div>
   );

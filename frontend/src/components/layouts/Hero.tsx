@@ -12,11 +12,11 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ title, subtitle, ctaLink1, ctaLink2 }) => {
     return (
         <section
-        className="w-full min-h-screen bg-gray-900 bg-cover bg-center bg-no-repeat flex flex-col justify-center px-4 sm:px-8 lg:px-16"
+        className="w-screen min-h-screen bg-gray-900 bg-cover bg-center bg-no-repeat flex flex-col justify-center px-4 sm:px-8 lg:px-16"
         style={{ backgroundImage: `url(${bgImage})` }}
         >
             <div className="max-w-4xl mx-auto text-center">
-                <h1 className="text-2xl md:text-4xl font-bold mb-8 text-white">{title}</h1>
+                <h1 className="text-2xl md:text-4xl font-bold mb-8 text-gray-900">{title}</h1>
                 <p className="text-lg md:text-2xl text-white font-medium mb-6">{subtitle}</p>
 
                 <div className="flex flex-col md:flex-row justify-center gap-6 md:gap-16">

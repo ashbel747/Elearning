@@ -1,6 +1,7 @@
 import Hero from "../components/layouts/Hero";
 import Benefits from "../components/layouts/Benefits";
 import Footer from "../components/layouts/Footer";
+import Testimonials from "./Testimonials";
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
         benContent3="Earn recognized certificates to advance your carrer"
         benContent4="Get personalized assistance with our intelligent tutoring system"
       />
+      <Testimonials />
       <Footer
         fp1="Empowering learners worldwide with accesible, high-quality education."
         fTitle1="Platform"

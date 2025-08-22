@@ -17,7 +17,7 @@ interface BenefitsProps {
 const Benefits: React.FC<BenefitsProps> = ({ sectTitle, sectSubTitle, benTitle1, benTitle2, benTitle3, benTitle4, benContent1, benContent2, benContent3, benContent4 }) => {
   return (
     <section 
-        className="w-full flex flex-col items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-800 text-white text-center bg-cover bg-center bg-no-repeat"
+        className="w-screen flex flex-col items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-800 text-white text-center bg-cover bg-center bg-no-repeat"
     >
         <h1 className="text-2xl md:text-4xl font-bold mb-4 text-black dark:text-white">{sectTitle}</h1>
         <h3 className="text-lg md:text-2xl text-black dark:text-white mb-6">{sectSubTitle}</h3>
