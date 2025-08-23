@@ -4,7 +4,7 @@ import type { InstructorDashboardData, Course, StudentProgress } from "../types/
 
 // Fetch instructor dashboard data
 export const fetchDashboardData = async (): Promise<InstructorDashboardData> => {
-  const { data } = await API.get("/instructor/dashboard");
+  const { data } = await API.get("/instructor/instr-dashboard");
   return data;
 };
 
