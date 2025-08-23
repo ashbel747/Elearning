@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { createQuiz } from "../../services/quizApi";
 import { type QuestionType, type NewQuiz, type NewQuestion } from "../../shared/quiztypes";
 
-const CreateQuizPage: React.FC = () => {
+export const CreateQuizPage: React.FC = () => {
   const [quiz, setQuiz] = useState<NewQuiz>({
     title: "",
     lessonId: "",

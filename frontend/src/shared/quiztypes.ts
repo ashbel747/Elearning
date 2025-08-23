@@ -20,6 +20,7 @@ export interface NewQuiz {
 export interface Quiz extends Omit<NewQuiz, "questions"> {
   _id: string;
   questions: Question[];
+  duration?: number;
 }
 
 export interface QuizAttempt {
