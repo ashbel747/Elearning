@@ -2,9 +2,12 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AxiosError } from "axios";
-import { api, setAuthToken } from "../services/quizApi"; // ✅ import setAuthToken
+import { api, setAuthToken } from "../services/quizApi";
 import { type LoginRequest, type AuthResponse } from "../shared/types";
 import { useAuth } from "../hooks/useAuth";
+
+// Import the Vector.png image
+import VectorImage from "../assets/Vector.png";
 
 export const Login: React.FC = () => {
   const { login } = useAuth();
@@ -20,31 +23,29 @@ export const Login: React.FC = () => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  setError(null);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError(null);
 
-  try {
-    const res = await api.post<AuthResponse>("/auth/login", form);
+    try {
+      const res = await api.post<AuthResponse>("/auth/login", form);
 
-    // ✅ Save token to localStorage
-    localStorage.setItem("token", res.data.token);
+      // Save token to localStorage
+      localStorage.setItem("token", res.data.token);
 
-    // ✅ Set Authorization header for future requests
-    setAuthToken(res.data.token);
+      // Set Authorization header for future requests
+      setAuthToken(res.data.token);
 
-    // ✅ Save user + token in context
-    login(res.data.user, res.data.token);   // pass BOTH user and token
+      // Save user + token in context
+      login(res.data.user, res.data.token);
 
-    // Show success modal
-    setShowSuccessModal(true);
-  } catch (err) {
-    const axiosError = err as AxiosError<{ message?: string }>;
-    setError(axiosError.response?.data?.message ?? "Login failed");
-  }
-};
-
-
+      // Show success modal
+      setShowSuccessModal(true);
+    } catch (err) {
+      const axiosError = err as AxiosError<{ message?: string }>;
+      setError(axiosError.response?.data?.message ?? "Login failed");
+    }
+  };
 
   const handleContinueToApp = () => {
     navigate("/dashboard");
@@ -65,10 +66,13 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           <div className="w-full max-w-lg bg-yellow-50 rounded-lg p-12 shadow-lg text-center">
             {/* Logo */}
             <div className="flex items-center justify-center mb-8">
-              <div className="bg-orange-500 p-2 rounded-lg mr-3">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
-                </svg>
+              {/* Removed background color from this div */}
+              <div className="p-2 rounded-lg mr-3">
+                <img
+                  src={VectorImage}
+                  alt="DirectEd Logo"
+                  className="w-6 h-6"
+                />
               </div>
               <span className="text-gray-800 text-xl font-bold">DirectEd</span>
             </div>
@@ -95,10 +99,13 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           {/* Header */}
           <div className="text-center mb-8">
             <div className="flex items-center justify-center mb-4">
-              <div className="bg-orange-500 p-2 rounded-lg mr-3">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
-                </svg>
+              {/* Removed background color from this div */}
+              <div className="p-2 rounded-lg mr-3">
+                <img
+                  src={VectorImage}
+                  alt="DirectEd Logo"
+                  className="w-6 h-6"
+                />
               </div>
               <span className="text-white text-xl font-bold">DirectEd</span>
             </div>
@@ -159,8 +166,8 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
               {/* Forgot Password Link */}
               <div className="text-right">
-                <Link 
-                  to="/reset-password" 
+                <Link
+                  to="/reset-password"
                   className="text-sm text-gray-500 hover:text-orange-500"
                 >
                   Forgot Your Password?

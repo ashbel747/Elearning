@@ -8,7 +8,7 @@ const studentLinks = [
   { name: "Dashboard", path: "/dashboard" },
   { name: "Browse Courses", path: "/courses" },
   { name: "My Courses", path: "/my-courses" },
-  { name: "Take Quiz", path: "/quiz/1" }, // You'll need to make this dynamic
+  { name: "Take Quiz", path: "/quiz/002" }, // You'll need to make this dynamic
   { name: "Notifications", path: "/notifications" },
   { name: "Profile", path: "/profile" },
   { name: "AI Assistant", path: "/assistant" },

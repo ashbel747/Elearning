@@ -27,21 +27,16 @@ function App() {
           <Route
             path="/quiz/:lessonId"
             element={
-              
-           <QuizPage />
-               
-            
-            }
+              <QuizPage />
+                 }
           />
 
           {/* Instructor Quiz Management */}
           <Route
             path="/quiz"
             element={
-            
-                  <CreateQuizPage />
-                
-              
+        <CreateQuizPage />
+                            
             }
           />
           <Route
