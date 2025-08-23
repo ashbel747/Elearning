@@ -2,7 +2,6 @@ import os
 import logging
 from typing import Optional, List, Dict
 from dotenv import load_dotenv
-
 from langchain_community.vectorstores import Chroma
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain.schema import Document
