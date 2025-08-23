@@ -3,7 +3,7 @@ import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-
+import chatRoutes from "./routes/chat.routes";
 // Routes
 import authRoutes from "./routes/auth.routes";
 import userRoutes from "./routes/user.routes";
@@ -40,6 +40,7 @@ app.use("/api/notifications", notificationRoutes);
 app.use("/api/progress", progressRoutes);
 app.use("/api/testimonials", testimonialRoutes);
 app.use("/api/instructor", instructorRoutes);
+app.use("/api/chat", chatRoutes);
 
 // Test & root routes
 app.get("/", (req, res) => res.json({ message: "API is running...🚀🚀" }));
