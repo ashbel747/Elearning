@@ -11,6 +11,8 @@ import { ChangePassword } from "./pages/ResetPasswordPage";
 import QuizPage from "./pages/Quiz/QuizPage";
 import CreateQuizPage from "./pages/Quiz/CreateQuizPage";
 import ViewQuizPage from "./pages/Quiz/ViewQuizPage";
+import Profile from "./pages/Profile";
+
 
 function App() {
   return (
