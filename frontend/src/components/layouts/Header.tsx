@@ -15,7 +15,7 @@ export const Header = ({ onMenuClick}: HeaderProps) => {
   const [search, setSearch] = useState("");
 
   return (
-    <header className="fixed top-0 left-0 w-full flex items-center justify-between p-4 shadow-md bg-gradient-to-r from-white to-amber-100 dark:from-gray-800 dark:to-gray-900">
+    <header className="fixed top-0 left-0 w-full flex items-center justify-between p-4 shadow-md bg-gradient-to-r from-white to-amber-100 dark:from-gray-800 dark:to-gray-900 z-50">
       {/* Left: Logo + Mobile Menu */}
       <div className="flex items-center gap-3">
         <button
