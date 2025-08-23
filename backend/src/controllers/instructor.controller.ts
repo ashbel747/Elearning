@@ -9,6 +9,7 @@ export const getInstructorDashboard = async (req: Request, res: Response) => {
   try {
     const instructorId = (req as any).user.id;
     const courses = await Course.find({ instructor: instructorId }).lean();
+    const totalCourses = courses.length; // Get the count here
     const courseIds = courses.map(c => c._id);
 
     const enrollAgg = await Enrollment.aggregate([
@@ -39,16 +40,7 @@ export const getInstructorDashboard = async (req: Request, res: Response) => {
       };
     });
 
-    const totals = {
-      totalCourses: courses.length,
-      totalStudents: enrollAgg.reduce((acc, cur) => acc + cur.studentsCount, 0),
-      avgCompletion: enrollAgg.length
-        ? Math.round((enrollAgg.reduce((acc, cur) => acc + (cur.avgComplete || 0), 0) / enrollAgg.length) * 100) / 100
-        : 0,
-      totalCompletions: enrollAgg.reduce((acc, cur) => acc + (cur.completions || 0), 0),
-    };
-
-    return res.json({ totals, courses: coursesWithStats });
+    return res.json({ totalCourses, courses: coursesWithStats });
   } catch (err: any) {
     console.error(err);
     return res.status(500).json({ message: "Server error", error: err.message });
