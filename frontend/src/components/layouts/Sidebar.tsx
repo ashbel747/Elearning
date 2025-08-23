@@ -8,6 +8,7 @@ const studentLinks = [
   { name: "Dashboard", path: "/dashboard" },
   { name: "Browse Courses", path: "/courses" },
   { name: "My Courses", path: "/my-courses" },
+  { name: "Take Quiz", path: "/quiz/1" }, // You'll need to make this dynamic
   { name: "Notifications", path: "/notifications" },
   { name: "Profile", path: "/profile" },
   { name: "AI Assistant", path: "/assistant" },
@@ -19,7 +20,8 @@ const instructorLinks = [
   { name: "Create Course", path: "/create-course" },
   { name: "Notifications", path: "/notifications" },
   { name: "Student Analytics", path: "/analytics" },
-  { name: "Quizzes", path: "/quizzes" },
+  { name: "Create Quiz", path: "/quiz" }, // Updated to match your route
+  { name: "View Quizzes", path: "/view-quiz/002" }, // You'll need to update this with dynamic lessonId
   { name: "Profile", path: "/profile" },
   { name: "AI Assistant", path: "/assistant" },
 ];
@@ -42,7 +44,6 @@ export const Sidebar = ({
       )}
       role="navigation"
     >
-
       {/* Close button (visible only on mobile) */}
       <div className="flex justify-end p-4">
         <button
@@ -57,9 +58,9 @@ export const Sidebar = ({
       <nav className="p-4 space-y-2">
         <div className="bg-black/5 p-1 rounded inline-block">
           <img 
-            src={DirectEdLogo} 
-            alt="DirectEd Logo" 
-            className="w-32 mb-4" 
+            src={DirectEdLogo}
+            alt="DirectEd Logo"
+            className="w-32 mb-4"
             />
         </div>
         {links.map((link) => (

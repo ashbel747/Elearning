@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { Layout } from "./components/layouts/Layout";
 import Home from "./pages/HomePage";
 import LessonPlayer from "./components/modules/LessonPlayer";
-import { ProtectedRoute } from "./components/ProtectedRoute";
+// import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthProvider";
 import { QuizProvider } from "./context/QuizContext";
 import { Login } from "./pages/LoginPage";
@@ -22,15 +22,13 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/reset-password" element={<ChangePassword />} />
 
-          {/* Protected Student Quiz */}
           <Route
             path="/quiz/:lessonId"
             element={
-              <ProtectedRoute role="student">
-                <Layout>
-                  <QuizPage />
-                </Layout>
-              </ProtectedRoute>
+              
+           <QuizPage />
+               
+            
             }
           />
 
@@ -38,21 +36,17 @@ function App() {
           <Route
             path="/quiz"
             element={
-              <ProtectedRoute role="instructor">
-                <Layout>
+            
                   <CreateQuizPage />
-                </Layout>
-              </ProtectedRoute>
+                
+              
             }
           />
           <Route
             path="/view-quiz/:lessonId"
             element={
-              <ProtectedRoute role="instructor">
-                <Layout>
-                  <ViewQuizPage />
-                </Layout>
-              </ProtectedRoute>
+           <ViewQuizPage />
+               
             }
           />
 
