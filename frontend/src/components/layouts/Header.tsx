@@ -15,7 +15,7 @@ export const Header = ({ onMenuClick}: HeaderProps) => {
   const [search, setSearch] = useState("");
 
   return (
-    <header className="fixed top-0 left-0 w-full flex items-center justify-between p-4 shadow-md bg-gradient-to-r from-white to-amber-100 dark:bg-gray-900">
+    <header className="fixed top-0 left-0 w-full flex items-center justify-between p-4 shadow-md bg-gradient-to-r from-white to-amber-100 dark:from-gray-800 dark:to-gray-900">
       {/* Left: Logo + Mobile Menu */}
       <div className="flex items-center gap-3">
         <button
@@ -69,13 +69,12 @@ export const Header = ({ onMenuClick}: HeaderProps) => {
                   to="/profile"
                   className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
-                  Profile
+                  Profile Page
                 </Link>
 
-                //Show only Logout if logged in
                 <button
                   onClick={logout}
-                  className="px-4 py-2 bg-red-500 text-white rounded-lg"
+                  className="px-4 py-2 bg-red-500 text-white rounded-lg w-full"
                 >
                   Logout
                 </button>

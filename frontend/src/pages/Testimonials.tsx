@@ -25,21 +25,21 @@ const Testimonials: React.FC = () => {
 
   return (
     <section className="py-10 bg-gray-50 dark:bg-gray-800 w-screen h-screen">
-      <h2 className="text-3xl font-bold text-center mb-8">What Our Users Say</h2>
+      <h2 className="text-3xl font-bold text-center mb-8 dark:text-white">What Our Users Say</h2>
 
       <div className="max-w-6xl mx-auto grid gap-6 sm:grid-cols-2 md:grid-cols-3">
         {testimonials.map((t) => (
           <div
             key={t._id}
-            className="bg-amber-300 dark:bg-gray-800 shadow-lg rounded-2xl p-6 flex flex-col hover:shadow-xl transition mt-10"
+            className="bg-amber-200 dark:bg-gray-700 shadow-lg rounded-2xl p-6 flex flex-col hover:shadow-xl transition mt-10"
           >
             <div>
-                <p className="mt-4 text-gray-700">"{t.review}"</p>
+                <p className="mt-4 text-gray-700 dark:text-white">"{t.review}"</p>
             </div>
             
             <div className="mt-4 text-left">
-                <h3 className="text-sm font-medium">{t.name}</h3>
-                <p className="text-sm text-gray-900">{t.role}</p>
+                <h3 className="text-sm font-medium dark:text-white">{t.name}</h3>
+                <p className="text-sm text-gray-900 dark:text-white">{t.role}</p>
             </div>
             
           </div>

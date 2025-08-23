@@ -7,6 +7,7 @@ import { Signup } from "./pages/SignupPage";
 import { ChangePassword } from "./pages/ResetPasswordPage";
 import QuizPage from "./components/QuizPage";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -66,6 +67,8 @@ function App() {
           </Layout>
         }
       />
+
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 }
