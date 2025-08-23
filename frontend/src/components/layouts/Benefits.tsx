@@ -24,8 +24,8 @@ const Benefits: React.FC<BenefitsProps> = ({ sectTitle, sectSubTitle, benTitle1,
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7 mt-5 px-4">
             <div className="flex flex-col shadow-md bg-gray-50 dark:bg-gray-700 pb-3">
                 <div className="w-full h-48 flex items-center justify-center">
-                    <div className="flex items-center justify-center w-20 h-20 rounded-full bg-amber-400 dark:bg-gray-700">
-                        <Book className="w-10 h-10 text-white" />
+                    <div className="flex items-center justify-center w-20 h-20 rounded-full bg-amber-200 dark:bg-gray-700">
+                        <Book className="w-10 h-10 text-amber-700" />
                     </div>
                 </div>
                 <div className="text-black dark:text-white text-center px-4">
@@ -36,8 +36,8 @@ const Benefits: React.FC<BenefitsProps> = ({ sectTitle, sectSubTitle, benTitle1,
             
             <div className="flex flex-col shadow-md bg-gray-50 dark:bg-gray-700 pb-3">
                 <div className="w-full h-48 flex items-center justify-center">
-                    <div className="flex items-center justify-center w-20 h-20 rounded-full bg-amber-400 dark:bg-gray-700">
-                        <Users className="w-10 h-10 text-white" />
+                    <div className="flex items-center justify-center w-20 h-20 rounded-full bg-amber-200 dark:bg-gray-700">
+                        <Users className="w-10 h-10 text-amber-700" />
                     </div>
                 </div>
                 <div className="text-black dark:text-white text-center px-4">
@@ -48,8 +48,8 @@ const Benefits: React.FC<BenefitsProps> = ({ sectTitle, sectSubTitle, benTitle1,
 
             <div className="flex flex-col shadow-md bg-gray-50 dark:bg-gray-700 pb-3">
                 <div className="w-full h-48 flex items-center justify-center">
-                    <div className="flex items-center justify-center w-20 h-20 rounded-full bg-amber-400 dark:bg-gray-700">
-                        <Badge className="w-10 h-10 text-white" />
+                    <div className="flex items-center justify-center w-20 h-20 rounded-full bg-amber-200 dark:bg-gray-700">
+                        <Badge className="w-10 h-10 text-amber-700" />
                     </div>
                 </div>
                 <div className="text-black dark:text-white text-center px-4">
@@ -60,8 +60,8 @@ const Benefits: React.FC<BenefitsProps> = ({ sectTitle, sectSubTitle, benTitle1,
 
             <div className="flex flex-col shadow-md bg-gray-50 dark:bg-gray-700 pb-3">
                 <div className="w-full h-48 flex items-center justify-center">
-                    <div className="flex items-center justify-center w-20 h-20 rounded-full bg-amber-400 dark:bg-gray-700">
-                        <Star className="w-10 h-10 text-white" />
+                    <div className="flex items-center justify-center w-20 h-20 rounded-full bg-amber-200 dark:bg-gray-700">
+                        <Star className="w-10 h-10 text-amber-700" />
                     </div>
                 </div>
                 <div className="text-black dark:text-white text-center px-4">

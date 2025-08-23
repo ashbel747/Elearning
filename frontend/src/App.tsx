@@ -94,6 +94,7 @@ function App() {
               </Layout>
             }
           />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </QuizProvider>
     </AuthProvider>

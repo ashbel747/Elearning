@@ -69,13 +69,12 @@ export const Header = ({ onMenuClick}: HeaderProps) => {
                   to="/profile"
                   className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
-                  Profile
+                  Profile Page
                 </Link>
 
-                //Show only Logout if logged in
                 <button
                   onClick={logout}
-                  className="px-4 py-2 bg-red-500 text-white rounded-lg"
+                  className="px-4 py-2 bg-red-500 text-white rounded-lg w-full"
                 >
                   Logout
                 </button>

@@ -20,7 +20,7 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ fp1, fTitle1, fLink1,fLink2, fTitle2, fLink3, fLink4, fLink5, fLink6, fTitle3, fLink7, fLink8, fLink9, fp2 }) => {
   return (
-    <footer className=" w-screen bg-amber-300 dark:bg-gray-800 text-gray-900 dark:text-white py-12">
+    <footer className=" w-screen bg-amber-200 dark:bg-gray-800 text-gray-900 dark:text-white py-12">
       {/* Top Section*/}
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         {/* First Colummn */}
