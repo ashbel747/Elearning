@@ -5,48 +5,28 @@ import { roleMiddleware } from "../middleware/role.middleware";
 import {
   getInstructorDashboard,
   getInstructorCourses,
-  getCourseStudents,
+  getCourseById,
   publishCourse,
   createCourse,
+  updateCourse,
+  deleteCourse,
 } from "../controllers/instructor.controller";
 import { UserRole } from "../shared/Authtypes"; 
 
 const router = Router();
 
 // Require auth + instructor role for all these routes
-router.get(
-  "/instr-dashboard",
-  authMiddleware,
-  roleMiddleware([UserRole.Instructor]),
-  getInstructorDashboard
-);
+router.use(authMiddleware, roleMiddleware([UserRole.Instructor]));
 
-router.get(
-  "/courses",
-  authMiddleware,
-  roleMiddleware([UserRole.Instructor]), 
-  getInstructorCourses
-);
+// Dashboard
+router.get("/instr-dashboard", getInstructorDashboard);
 
-router.get(
-  "/students/:courseId",
-  authMiddleware,
-  roleMiddleware([UserRole.Instructor]), 
-  getCourseStudents
-);
-
-router.post(
-  "/courses/:courseId/publish",
-  authMiddleware,
-  roleMiddleware([UserRole.Instructor]),
-  publishCourse
-);
-
-router.post(
-  "/courses",
-  authMiddleware,
-  roleMiddleware([UserRole.Instructor]), 
-  createCourse
-);
+// Courses
+router.get("/courses", getInstructorCourses);
+router.get("/courses/:id", getCourseById);          // Fetch single course
+router.post("/courses", createCourse);             // Create new course
+router.put("/courses/:id", updateCourse);          // Update course
+router.delete("/courses/:id", deleteCourse);       // Delete course
+router.post("/courses/:courseId/publish", publishCourse); // Publish/unpublish
 
 export default router;
