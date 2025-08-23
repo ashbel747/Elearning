@@ -1,4 +1,3 @@
-// src/components/layout/Sidebar.tsx
 import { useAuth } from "../../context/AuthContext";
 import { X } from "lucide-react";
 import clsx from "clsx";
@@ -8,20 +7,20 @@ const studentLinks = [
   { name: "Dashboard", path: "/dashboard" },
   { name: "Browse Courses", path: "/courses" },
   { name: "My Courses", path: "/my-courses" },
-  { name: "Take Quiz", path: "/quiz/002" }, // You'll need to make this dynamic
+  { name: "Take Quiz", path: "/quiz/:lessonId" },
   { name: "Notifications", path: "/notifications" },
   { name: "Profile", path: "/profile" },
   { name: "AI Assistant", path: "/assistant" },
 ];
 
 const instructorLinks = [
-  { name: "Dashboard", path: "/dashboard" },
-  { name: "My Courses", path: "/my-courses" },
-  { name: "Create Course", path: "/create-course" },
+  { name: "Dashboard", path: "/instructor/dashboard" },
+  { name: "My Courses", path: "/instructor/courses" },
+  { name: "Create Course", path: "/instructor/courses/new" },
   { name: "Notifications", path: "/notifications" },
   { name: "Student Analytics", path: "/analytics" },
-  { name: "Create Quiz", path: "/quiz" }, // Updated to match your route
-  { name: "View Quizzes", path: "/view-quiz/002" }, // You'll need to update this with dynamic lessonId
+  { name: "Create Quiz", path: "/quiz" }, 
+  { name: "View Quizzes", path: "/view-quiz/:lessonId" },
   { name: "Profile", path: "/profile" },
   { name: "AI Assistant", path: "/assistant" },
 ];
