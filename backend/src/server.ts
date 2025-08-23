@@ -3,6 +3,8 @@ import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
+import helmet from "helmet";
+import contentRoutes from "./routes/contentRoutes";
 import chatRoutes from "./routes/chat.routes";
 // Routes
 import authRoutes from "./routes/auth.routes";
@@ -25,12 +27,22 @@ const PORT = process.env.PORT || 3500;
 const MONGO_URI = process.env.MONGO_URI || "";
 
 // Middleware
+app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-app.get("/test", (req, res) => res.json({ message: "Routing is working" }));
+// MOVE LOGGING HERE - BEFORE ALL ROUTES
+// Replace your logging middleware with this:
+const loggingMiddleware = (req: Request, res: Response, next: any) => {
+  console.log("=== REQUEST RECEIVED ===");
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.originalUrl}`);
+  next();
+};
 
-// Routes
+app.use(loggingMiddleware);
+
+// Routes (logging will catch these now)
+app.get("/test", (req, res) => res.json({ message: "Routing is working" }));
 app.use("/api/auth", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api/quizzes", quizRoutes);
@@ -41,6 +53,7 @@ app.use("/api/progress", progressRoutes);
 app.use("/api/testimonials", testimonialRoutes);
 app.use("/api/instructor", instructorRoutes);
 app.use("/api/chat", chatRoutes);
+app.use("/api/content", contentRoutes);
 
 // Test & root routes
 app.get("/", (req, res) => res.json({ message: "API is running...🚀🚀" }));

@@ -10,9 +10,7 @@ import { signupSchema, loginSchema, changePasswordSchema } from "../validation";
 import { authMiddleware } from "../middleware/auth.middleware";
 import { roleMiddleware } from "../middleware/role.middleware";
 import { UserRole } from "../shared/Authtypes";
-
 const router = Router();
-
 router.post("/signup", validate(signupSchema), signup);
 router.post("/login", validate(loginSchema), login);
 router.put(
