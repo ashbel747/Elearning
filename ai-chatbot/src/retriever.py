@@ -9,7 +9,6 @@ from langchain.schema import Document
 
 load_dotenv()
 
-# Setup logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -27,16 +26,13 @@ def setup_retriever(k: int = 3, filters: Optional[Dict] = None):
         retriever: LangChain retriever object
     """
     try:
-        # Load embeddings
         embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
 
-        # Load existing Chroma vector DB
         vectordb = Chroma(
             persist_directory=CHROMA_DB_DIR,
             embedding_function=embeddings
         )
 
-        # Configure retriever with filters if provided
         search_kwargs = {"k": k}
         if filters:
             search_kwargs["filter"] = filters
@@ -76,6 +72,5 @@ def test_retriever(query: str, k: int = 3, filters: Optional[Dict] = None) -> Li
 
 
 if __name__ == "__main__":
-    # Simple test example
     test_query = "What are the main goals of the Gen AI module?"
     test_retriever(test_query, k=2)
