@@ -15,6 +15,7 @@
       "@models/*": ["models/*"],
       "@utils/*": ["utils/*"]
     },
+    "types":["node"],
     "sourceMap": true,
     "resolveJsonModule": true,
     "typeRoots": ["./node_modules/@types", "./types"]

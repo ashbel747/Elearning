@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { ZodError } from "zod";
+import { ZodError, ZodIssue } from "zod";
 
 export class AppError extends Error {
   public statusCode: number;
@@ -23,18 +23,20 @@ export const errorMiddleware = (
   res: Response,
   next: NextFunction
 ) => {
-  // Check if the error is a Zod validation error
+  // Handle Zod validation errors
   if (error instanceof ZodError) {
-    const errorMessages = error.issues.map((issue) => ({
+    const errorMessages = error.issues.map((issue: ZodIssue) => ({
       path: issue.path.join("."),
       message: issue.message,
     }));
+
     return res.status(400).json({
       status: "fail",
       errors: errorMessages,
     });
   }
 
+  // Handle custom AppError
   if (error instanceof AppError) {
     return res.status(error.statusCode).json({
       status: "fail",
@@ -42,6 +44,7 @@ export const errorMiddleware = (
     });
   }
 
+  // Handle generic server error
   return res.status(500).json({
     status: "error",
     message: "Something went wrong on the server.",
