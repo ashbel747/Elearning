@@ -13,6 +13,7 @@ import searchRoutes from "./routes/search.route";
 import notificationRoutes from "./routes/notification.route";
 import progressRoutes from "./routes/progress.routes";
 import testimonialRoutes from "./routes/testimonial.routes";
+import instructorRoutes from "./routes/instructor.routes";
 
 import { errorMiddleware } from "./middleware/errorHandler";
 
@@ -38,6 +39,7 @@ app.use("/api/search", searchRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/progress", progressRoutes);
 app.use("/api/testimonials", testimonialRoutes);
+app.use("/api/instructor", instructorRoutes);
 
 // Test & root routes
 app.get("/", (req, res) => res.json({ message: "API is running...🚀🚀" }));
