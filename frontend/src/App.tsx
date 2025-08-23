@@ -12,7 +12,10 @@ import QuizPage from "./pages/Quiz/QuizPage";
 import CreateQuizPage from "./pages/Quiz/CreateQuizPage";
 import ViewQuizPage from "./pages/Quiz/ViewQuizPage";
 import Profile from "./pages/Profile";
-import { VirtualAssistant } from "./components/VirtualAssistant/VirtualAssistant";
+import Dashboard from "./pages/instructor/Dashboard";
+import Courses from "./pages/instructor/Courses";
+import CourseForm from "./pages/instructor/CourseForm";
+import {VirtualAssistant} from './components/VirtualAssistant/VirtualAssistant'
 
 
 function App() {
@@ -20,6 +23,47 @@ function App() {
     <AuthProvider>
       <QuizProvider>
         <Routes>
+          <Route
+            path="/instructor/dashboard"
+            element={
+              <AuthProvider>
+                <Layout>
+                  <Dashboard />
+                </Layout>
+              </AuthProvider>
+            }
+          />
+          <Route 
+            path="/instructor/courses" 
+            element={
+              <AuthProvider>
+                <Layout>
+                  <Courses />
+                </Layout>
+              </AuthProvider>
+            } 
+          />
+          <Route 
+            path="/instructor/courses/new" 
+            element={
+              <AuthProvider>
+                <Layout>
+                  <CourseForm />
+                </Layout>
+              </AuthProvider>
+            } 
+          />
+
+          <Route 
+            path="/instructor/courses/:id" 
+            element={
+              <AuthProvider>
+                <Layout>
+                  <CourseForm />
+                </Layout>
+              </AuthProvider>
+            } 
+          />
           {/* Auth routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
