@@ -126,8 +126,6 @@ function App() {
                   onProgressUpdate={(progress) =>
                     console.log("Progress updated:", progress)
                   }
-                  onNextLesson={() => console.log("Go to next lesson")}
-                  onPrevLesson={() => console.log("Go to previous lesson")}
                 />
               </Layout>
             }

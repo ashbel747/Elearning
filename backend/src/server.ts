@@ -18,9 +18,13 @@ import testimonialRoutes from "./routes/testimonial.routes";
 import instructorRoutes from "./routes/instructor.routes";
 
 import { errorMiddleware } from "./middleware/errorHandler";
+import path from "path";
 
 // Load environment variables
-dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
+
+console.log("PORT:", process.env.PORT);
+console.log("Mongo URI:", process.env.MONGO_URI);
 
 const app = express();
 const PORT = process.env.PORT || 3500;
