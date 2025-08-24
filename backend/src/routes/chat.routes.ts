@@ -11,10 +11,10 @@ import {
 
 const router = Router();
 
-// POST /api/chat/send - Send a message
+// POST /api/chat/message - Send a message
 router.post("/message", async (req, res) => {
   try {
-    const { sessionId, message }: MessageRequest = req.body;
+    const { sessionId, message, context }: MessageRequest & { context?: any } = req.body;
 
     // Validation
     if (!sessionId || !message) {
@@ -31,7 +31,13 @@ router.post("/message", async (req, res) => {
       session = new ChatSession({
         _id: sessionId,
         messages: [],
+        context: context || {},
       });
+    }
+
+    // Update context if provided
+    if (context) {
+      session.context = { ...session.context, ...context };
     }
 
     // Create user message
@@ -44,7 +50,7 @@ router.post("/message", async (req, res) => {
     // Add user message to session
     session.messages.push(userMessage);
 
-    // Call AI service
+    // Call AI service with context
     const aiResponse = await callAI(session.messages);
 
     // Create AI message
@@ -69,7 +75,7 @@ router.post("/message", async (req, res) => {
 
     res.json(response);
   } catch (err) {
-    console.error("Error in /send:", err);
+    console.error("Error in /message:", err);
     const errorResponse: ErrorResponse = {
       error: "Internal server error",
       code: 500,

@@ -1,24 +1,53 @@
 import React, { useState, useEffect, useRef } from "react";
-import { type ChatMessage, type ChatContext } from "../../shared/chatTypes";
+import { type DisplayMessage, type ChatContext } from "../../shared/chatTypes";
 import { MessageBubble } from "./MessageBubble";
 import { QuickActions } from "./QuickActions";
 import { TypingIndicator } from "./TypingIndicator";
+import { sendMessage, getHistory, convertToDisplayMessage } from "../../services/chatApi";
 
-export const VirtualAssistant: React.FC<{ context: ChatContext }> = () => {
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+export const VirtualAssistant: React.FC<{ context: ChatContext }> = ({ context }) => {
+  const [messages, setMessages] = useState<DisplayMessage[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [sessionId, setSessionId] = useState<string>("");
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
-  // Initialize with a welcome message
+  // Initialize session ID and load chat history
   useEffect(() => {
-    const welcomeMessage: ChatMessage = {
-      id: crypto.randomUUID(),
-      sender: "assistant",
-      text: "Welcome to your AI Learning Assistant! I'm here to help you with your learning journey. Choose a mode above to get started, or ask me anything.",
-      timestamp: new Date().toISOString(),
+    const newSessionId = crypto.randomUUID();
+    setSessionId(newSessionId);
+
+    // Load chat history if session exists
+    const loadHistory = async () => {
+      try {
+        const historyResponse = await getHistory(newSessionId);
+        if (historyResponse.history.length > 0) {
+          const displayMessages = historyResponse.history.map(convertToDisplayMessage);
+          setMessages(displayMessages);
+        } else {
+          // Show welcome message for new sessions
+          const welcomeMessage: DisplayMessage = {
+            id: crypto.randomUUID(),
+            sender: "assistant",
+            text: "Welcome to your AI Learning Assistant! I'm here to help you with your learning journey. Ask me anything about courses, lessons, or general help.",
+            timestamp: new Date().toISOString(),
+          };
+          setMessages([welcomeMessage]);
+        }
+      } catch (error) {
+        console.error("Failed to load chat history:", error);
+        // Show welcome message on error
+        const welcomeMessage: DisplayMessage = {
+          id: crypto.randomUUID(),
+          sender: "assistant",
+          text: "Welcome to your AI Learning Assistant! I'm here to help you with your learning journey. Ask me anything about courses, lessons, or general help.",
+          timestamp: new Date().toISOString(),
+        };
+        setMessages([welcomeMessage]);
+      }
     };
-    setMessages([welcomeMessage]);
+
+    loadHistory();
   }, []);
 
   // Auto-scroll to bottom when new messages come in
@@ -26,43 +55,10 @@ export const VirtualAssistant: React.FC<{ context: ChatContext }> = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Simple mock responses based on input
-  const generateResponse = (userMessage: string): string => {
-    const lowerMessage = userMessage.toLowerCase();
-    
-    if (lowerMessage.includes("enroll") || lowerMessage.includes("course")) {
-      return "To enroll in a course, go to the course page and click the 'Enroll' button. You can browse available courses from the main dashboard.";
-    }
-    if (lowerMessage.includes("certificate")) {
-      return "Your certificates can be found in your profile section. Once you complete a course, the certificate will be automatically generated and available for download.";
-    }
-    if (lowerMessage.includes("profile") || lowerMessage.includes("update")) {
-      return "To update your profile, click on your avatar in the top right corner and select 'Profile Settings'. You can update your personal information, preferences, and password there.";
-    }
-    if (lowerMessage.includes("feature") || lowerMessage.includes("platform")) {
-      return "Our platform features include: video lessons, interactive quizzes, progress tracking, certificates, and this virtual assistant. You can access most features from the main navigation menu.";
-    }
-    if (lowerMessage.includes("help") || lowerMessage.includes("support")) {
-      return "I'm here to help! You can ask me about enrolling in courses, accessing certificates, updating your profile, or navigating the platform features.";
-    }
-    if (lowerMessage.includes("quiz")) {
-      return "Quizzes are available for each lesson. You can take them to test your knowledge and track your progress. Your quiz results are saved in your profile.";
-    }
-    if (lowerMessage.includes("video") || lowerMessage.includes("lesson")) {
-      return "Video lessons can be accessed from your enrolled courses. You can pause, rewind, and take notes while watching. Your progress is automatically saved.";
-    }
-    if (lowerMessage.includes("draw") || lowerMessage.includes("button") || lowerMessage.includes("prototype") || lowerMessage.includes("dribbble")) {
-      return "For design and prototyping questions, I'd recommend checking out design resources like Figma, Sketch, or Adobe XD. You can also explore design inspiration on platforms like Dribbble and Behance!";
-    }
-    
-    // Default response
-    return "I understand you're asking about: " + userMessage + ". While I'm still learning, you can use the quick actions above for common questions, or try asking about courses, certificates, profiles, or platform features!";
-  };
-
   const handleSend = async (text: string) => {
-    if (!text.trim()) return;
+    if (!text.trim() || !sessionId) return;
 
-    const newMessage: ChatMessage = {
+    const newMessage: DisplayMessage = {
       id: crypto.randomUUID(),
       sender: "user",
       text,
@@ -73,19 +69,42 @@ export const VirtualAssistant: React.FC<{ context: ChatContext }> = () => {
     setInput("");
     setIsTyping(true);
 
-    // Simulate typing delay
-    setTimeout(() => {
-      const responseText = generateResponse(text);
-      const assistantResponse: ChatMessage = {
+    try {
+      // Send message to API with context
+      const response = await sendMessage({
+        sessionId,
+        message: text,
+        context: {
+          page: context.page,
+          courseId: context.courseId,
+          lessonId: context.lessonId,
+        },
+      });
+
+      // Add AI response to messages
+      const assistantResponse: DisplayMessage = {
         id: crypto.randomUUID(),
         sender: "assistant",
-        text: responseText,
+        text: response.reply,
         timestamp: new Date().toISOString(),
       };
 
       setMessages((prev) => [...prev, assistantResponse]);
+    } catch (error) {
+      console.error("Failed to send message:", error);
+
+      // Show error message
+      const errorMessage: DisplayMessage = {
+        id: crypto.randomUUID(),
+        sender: "assistant",
+        text: "Sorry, I'm having trouble connecting right now. Please try again in a moment.",
+        timestamp: new Date().toISOString(),
+      };
+
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
       setIsTyping(false);
-    }, 1000 + Math.random() * 1000);
+    }
   };
 
   return (
@@ -98,10 +117,10 @@ export const VirtualAssistant: React.FC<{ context: ChatContext }> = () => {
         {messages.map((msg) => (
           <MessageBubble key={msg.id} msg={msg} />
         ))}
-        
+
         {/* Typing indicator */}
         {isTyping && <TypingIndicator />}
-        
+
         <div ref={messagesEndRef} />
       </div>
 
@@ -123,9 +142,15 @@ export const VirtualAssistant: React.FC<{ context: ChatContext }> = () => {
             disabled={!input.trim() || isTyping}
             className="w-12 h-12 bg-orange-500 hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-full flex items-center justify-center text-white transition-colors shadow-lg"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-            </svg>
+            {isTyping ? (
+              <svg className="w-5 h-5 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v4m0 4v4m0-8h.01M12 16h.01" />
+              </svg>
+            ) : (
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              </svg>
+            )}
           </button>
         </div>
       </div>

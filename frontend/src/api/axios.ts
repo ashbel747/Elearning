@@ -1,7 +1,13 @@
 import axios from "axios";
 
+// 🔹 Environment-based API configuration
+const isDevelopment = import.meta.env.DEV;
+const baseURL = isDevelopment 
+  ? "http://localhost:3500/api" 
+  : "https://elearning-backend-4hxa.onrender.com/api";
+
 const API = axios.create({
-  baseURL: "https://elearning-backend-4hxa.onrender.com/api", // 🔹 Change to your backend URL
+  baseURL,
   headers: {
     "Content-Type": "application/json",
   },

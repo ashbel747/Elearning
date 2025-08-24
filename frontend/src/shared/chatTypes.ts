@@ -1,7 +1,6 @@
 export interface ChatMessage {
-  id: string;
-  sender: "user" | "assistant";
-  text: string;
+  role: "user" | "assistant" | "system";
+  content: string;
   timestamp: string;
 }
 
@@ -11,14 +10,40 @@ export interface ChatContext {
   lessonId?: string;
 }
 
-export interface ChatRequest {
-  message: string;
-  context: ChatContext;
-  sessionId: string;
+// Frontend-specific message structure for display
+export interface DisplayMessage {
+  id: string;
+  sender: "user" | "assistant";
+  text: string;
+  timestamp: string;
 }
 
+// API request structure
+export interface ChatRequest {
+  sessionId: string;
+  message: string;
+  context?: {
+    page: string;
+    courseId?: string;
+    lessonId?: string;
+  };
+}
+
+// API response structure
 export interface ChatResponse {
   sessionId: string;
-  reply: ChatMessage;
-  history?: ChatMessage[];
+  reply: string;
+  context: ChatMessage[];
+}
+
+// History response structure
+export interface HistoryResponse {
+  sessionId: string;
+  history: ChatMessage[];
+}
+
+// Error response structure
+export interface ErrorResponse {
+  error: string;
+  code?: number;
 }
