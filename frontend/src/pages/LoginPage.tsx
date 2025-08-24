@@ -1,12 +1,9 @@
-// src/pages/LoginPage.tsx
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AxiosError } from "axios";
 import { api, setAuthToken } from "../services/quizApi";
 import { type LoginRequest, type AuthResponse } from "../shared/types";
 import { useAuth } from "../hooks/useAuth";
-
-// Import the Vector.png image
 import VectorImage from "../assets/Vector.png";
 
 export const Login: React.FC = () => {
@@ -30,10 +27,11 @@ export const Login: React.FC = () => {
     try {
       const res = await api.post<AuthResponse>("/auth/login", form);
 
-      // Save token to localStorage
+      // Save token + user to localStorage
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      // Set Authorization header for future requests
+      // Set Authorization header
       setAuthToken(res.data.token);
 
       // Save user + token in context
@@ -48,7 +46,12 @@ export const Login: React.FC = () => {
   };
 
   const handleContinueToApp = () => {
-    navigate("/");
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    if (user?.role === "instructor") {
+      navigate("/instructor/dashboard");
+    } else {
+      navigate("/dashboard");
+    }
   };
 
   return (
@@ -66,13 +69,8 @@ export const Login: React.FC = () => {
           <div className="w-full max-w-lg bg-yellow-50 rounded-lg p-12 shadow-lg text-center">
             {/* Logo */}
             <div className="flex items-center justify-center mb-8">
-              {/* Removed background color from this div */}
               <div className="p-2 rounded-lg mr-3">
-                <img
-                  src={VectorImage}
-                  alt="DirectEd Logo"
-                  className="w-6 h-6"
-                />
+                <img src={VectorImage} alt="DirectEd Logo" className="w-6 h-6" />
               </div>
               <span className="text-gray-800 text-xl font-bold">DirectEd</span>
             </div>
@@ -93,19 +91,14 @@ export const Login: React.FC = () => {
         </div>
       )}
 
-      {/* Regular Login Form - Hidden when success modal is shown */}
+      {/* Regular Login Form */}
       {!showSuccessModal && (
         <>
           {/* Header */}
           <div className="text-center mb-8">
             <div className="flex items-center justify-center mb-4">
-              {/* Removed background color from this div */}
               <div className="p-2 rounded-lg mr-3">
-                <img
-                  src={VectorImage}
-                  alt="DirectEd Logo"
-                  className="w-6 h-6"
-                />
+                <img src={VectorImage} alt="DirectEd Logo" className="w-6 h-6" />
               </div>
               <span className="text-white text-xl font-bold">DirectEd</span>
             </div>
@@ -164,12 +157,9 @@ export const Login: React.FC = () => {
                 </div>
               </div>
 
-              {/* Forgot Password Link */}
+              {/* Forgot Password */}
               <div className="text-right">
-                <Link
-                  to="/reset-password"
-                  className="text-sm text-gray-500 hover:text-orange-500"
-                >
+                <Link to="/reset-password" className="text-sm text-gray-500 hover:text-orange-500">
                   Forgot Your Password?
                 </Link>
               </div>
@@ -185,10 +175,7 @@ export const Login: React.FC = () => {
             {/* Sign Up Link */}
             <p className="text-center text-sm text-gray-600 mt-4">
               Don't have an account?{" "}
-              <Link
-                to="/signup"
-                className="text-orange-500 hover:text-orange-600 font-medium"
-              >
+              <Link to="/signup" className="text-orange-500 hover:text-orange-600 font-medium">
                 Sign Up
               </Link>
             </p>

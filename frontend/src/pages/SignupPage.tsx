@@ -59,8 +59,14 @@ export const Signup: React.FC = () => {
 
 
   const handleContinueToApp = () => {
-    navigate("/");
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    if (user?.role === "instructor") {
+      navigate("/instructor/dashboard");
+    } else {
+      navigate("/dashboard");
+    }
   };
+
 
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center px-4">
