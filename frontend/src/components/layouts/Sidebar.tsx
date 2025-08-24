@@ -7,7 +7,7 @@ const studentLinks = [
   { name: "Dashboard", path: "/dashboard" },
   { name: "Browse Courses", path: "/courses" },
   { name: "My Courses", path: "/my-courses" },
-  { name: "Take Quiz", path: "/quiz/:lessonId" },
+  { name: "Take Quiz", path: "/quiz/002" },
   { name: "Notifications", path: "/notifications" },
   { name: "Profile", path: "/profile" },
   { name: "AI Assistant", path: "/assistant" },
@@ -20,7 +20,7 @@ const instructorLinks = [
   { name: "Notifications", path: "/notifications" },
   { name: "Student Analytics", path: "/analytics" },
   { name: "Create Quiz", path: "/quiz" }, 
-  { name: "View Quizzes", path: "/view-quiz/:lessonId" },
+  { name: "View Quizzes", path: "/view-quiz/002" },
   { name: "Profile", path: "/profile" },
   { name: "AI Assistant", path: "/assistant" },
 ];
