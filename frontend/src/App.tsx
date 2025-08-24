@@ -17,6 +17,7 @@ import Courses from "./pages/instructor/Courses";
 import CourseForm from "./pages/instructor/CourseForm";
 import {VirtualAssistant} from './components/VirtualAssistant/VirtualAssistant';
 import ContentManagement from './pages/ContentManagement'
+import CourseCatalogSystem from './pages/CoursesCat'
 
 function App() {
   return (
@@ -92,6 +93,13 @@ function App() {
             path="/view-quiz/:lessonId"
             element={
            <ViewQuizPage />
+               
+            }
+          />
+          <Route
+            path="/courses"
+            element={
+           <CourseCatalogSystem />
                
             }
           />

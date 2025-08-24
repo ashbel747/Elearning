@@ -6,7 +6,7 @@ import DirectEdLogo from "../../assets/image.webp"
 const studentLinks = [
   { name: "Dashboard", path: "/dashboard" },
   { name: "Browse Courses", path: "/courses" },
-  { name: "My Courses", path: "/my-courses" },
+  { name: "My Courses", path: "/courses" },
   { name: "Take Quiz", path: "/quiz/002" },
   { name: "Notifications", path: "/notifications" },
   { name: "Profile", path: "/profile" },

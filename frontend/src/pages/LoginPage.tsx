@@ -48,7 +48,7 @@ export const Login: React.FC = () => {
   };
 
   const handleContinueToApp = () => {
-    navigate("/dashboard");
+    navigate("/");
   };
 
   return (
