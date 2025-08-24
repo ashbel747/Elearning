@@ -8,7 +8,7 @@ const Testimonials: React.FC = () => {
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
-        const res = await fetch("http://localhost:3500/api/testimonials");
+        const res = await fetch("https://elearning-backend-4hxa.onrender.com/api/testimonials");
         const data = await res.json();
         setTestimonials(data.data); // backend returns { success, data: [...] }
       } catch (error) {

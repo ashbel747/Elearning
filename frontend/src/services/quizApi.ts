@@ -6,7 +6,7 @@ import type {
   NewQuizAttempt,
 } from "../shared/quiztypes";
 
-const API_BASE = "http://localhost:3500/api";
+const API_BASE = "https://elearning-backend-4hxa.onrender.com/api";
 
 export const api = axios.create({ baseURL: API_BASE });
 

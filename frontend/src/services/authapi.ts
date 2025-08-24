@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_BASE_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:3500/api/auth";
+  import.meta.env.VITE_API_URL || "https://elearning-backend-4hxa.onrender.com/api/auth";
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
