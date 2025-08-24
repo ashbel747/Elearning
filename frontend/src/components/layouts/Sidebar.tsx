@@ -11,6 +11,7 @@ const studentLinks = [
   { name: "Notifications", path: "/notifications" },
   { name: "Profile", path: "/profile" },
   { name: "AI Assistant", path: "/assistant" },
+  {name: "Lesson player", path: "/lesson" }
 ];
 
 const instructorLinks = [
@@ -23,6 +24,7 @@ const instructorLinks = [
   { name: "View Quizzes", path: "/view-quiz/002" },
   { name: "Profile", path: "/profile" },
   { name: "AI Assistant", path: "/assistant" },
+  {name: "Lesson player", path: "/lesson" }
 ];
 
 export const Sidebar = ({
